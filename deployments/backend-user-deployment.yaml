@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udagram-user
+  labels:
+    app: udagram-user
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: udagram-user
+  template:
+    metadata:
+      labels:
+        app: udagram-user
+    spec:
+      volumes:
+        - name: aws-secret
+          secret:
+            secretName: aws-secret
+      containers:
+      - name: udagram-user
+        image: codart7/udagram-api-user:v2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        envFrom:
+          - configMapRef:
+              name: env-config
+          - secretRef:
+              name: env-secret
+        resources:
+          limits:
+            cpu: 512m
+          requests:
+            cpu: 256m
+        volumeMounts:
+          - name: aws-secret
+            mountPath: '/root/.aws/'
+            readOnly: true
