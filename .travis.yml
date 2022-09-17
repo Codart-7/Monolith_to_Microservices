@@ -19,14 +19,15 @@ script:
   - docker build -t udagram-frontend ./udagram-frontend
   - docker build -t reverseproxy ./udagram-reverseproxy
 
-  - docker tag udagram-api-feed codart7/udagram-api-feed:latest
-  - docker tag udagram-api-user codart7/udagram-api-user:latest
-  - docker tag udagram-frontend codart7/udagram-frontend:latest
-  - docker tag reverseproxy codart7/reverseproxy:latest
+- docker tag <image_name>:<image
+  - docker tag udagram-api-feed:latest codart7/udagram-api-feed:udagram-api-feed
+  - docker tag udagram-api-user:latest codart7/udagram-api-user:udagram-api-user
+  - docker tag udagram-frontend:latest codart7/udagram-frontend:udagram-frontend
+  - docker tag reverseproxy:latest codart7/reverseproxy:reverseproxy
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push codart7/udagram-api-feed
-  - docker push codart7/udagram-api-user
-  - docker push codart7/udagram-frontend
-  - docker push codart7/reverseproxy
+  - docker push codart7/udagram-api-feed:udagram-api-feed
+  - docker push codart7/udagram-api-user:udagram-api-user
+  - docker push codart7/udagram-frontend:udagram-frontend
+  - docker push codart7/reverseproxy:reverseproxy
