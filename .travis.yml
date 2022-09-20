@@ -14,7 +14,7 @@ script:
 #tagging
   - docker tag udagram-api-feed codart7/udagram-api-feed:v3
   - docker tag udagram-api-user codart7/udagram-api-user:v3
-  - docker tag udagram-frontend codart7/udagram-frontend:v3
+  - docker tag udagram-frontend codart7/udagram-frontend:v4
   - docker tag reverseproxy codart7y/reverseproxy:latest
 
 #pushing
@@ -22,5 +22,5 @@ after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - docker push codart7/udagram-api-feed:v3
   - docker push codart7/udagram-api-user:v3
-  - docker push codart7/udagram-frontend:v3
+  - docker push codart7/udagram-frontend:v4
   - docker push codart7/reverseproxy:latest
